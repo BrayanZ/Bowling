@@ -5,7 +5,11 @@ class Game
   end
 
   def roll(pins)
-    Game.new(@rolls << pins)
+    rolls = @rolls.dup.tap do |rolls| 
+      rolls << pins 
+      rolls << 0 if pins == 10
+    end
+    Game.new(rolls)
   end
 
   def score
@@ -17,11 +21,16 @@ class Game
   def frame_score(frame, index)
     score = frame.reduce(:+)
     score += rolls[index + 2] if spare? frame
+    score += rolls[index + 2] + rolls[index + 3] if strike? frame
     return score
   end
 
   def spare? frame
-    frame.reduce(:+) == 10
+    frame.reduce(:+) == 10 && frame[1] != 0
+  end
+
+  def strike? frame
+    frame[0] == 10
   end
 end
 
