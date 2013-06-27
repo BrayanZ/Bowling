@@ -14,32 +14,33 @@ class Game
 end
 
 describe Game do
-  A_NUMBER_OF_PINS = 3
-  ANOTHER_NUMBER_OF_PINS = 1
+  THREE_PINS = 3
+  ONE_PIN = 1
   GUTTER_ROLL = 0
+  NUMBER_OF_ROLLS = 20
 
   describe 'roll' do
     let(:game) { described_class.new([]) }
 
     it 'adds the result of the roll' do
-      game_after_roll = game.roll(A_NUMBER_OF_PINS)
-      expect(game_after_roll.rolls).to eq [A_NUMBER_OF_PINS]
+      game_after_roll = game.roll(THREE_PINS)
+      expect(game_after_roll.rolls).to eq [THREE_PINS]
     end
 
     it 'plays other roll' do
-      game_after_second_roll = game.roll(A_NUMBER_OF_PINS).roll(ANOTHER_NUMBER_OF_PINS)
-      expect(game_after_second_roll.rolls).to eq [A_NUMBER_OF_PINS, ANOTHER_NUMBER_OF_PINS]
+      game_after_second_roll = game.roll(THREE_PINS).roll(ONE_PIN)
+      expect(game_after_second_roll.rolls).to eq [THREE_PINS, ONE_PIN]
     end
   end
 
   describe 'score' do
     it 'calulates the score for a gutter game' do
-      game = described_class.new([GUTTER_ROLL] * 20)
+      game = described_class.new([GUTTER_ROLL] * NUMBER_OF_ROLLS)
       expect(game.score).to eq 0
     end
 
     it 'calculates the score for a regular game' do
-      game = described_class.new([A_NUMBER_OF_PINS] * 20)
+      game = described_class.new([THREE_PINS] * NUMBER_OF_ROLLS)
       expect(game.score).to eq 60
     end
   end
