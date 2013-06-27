@@ -26,11 +26,12 @@ class Game
 end
 
 describe Game do
-  THREE_PINS = 3
-  FIVE_PINS = 5
-  ONE_PIN = 1
-  GUTTER_ROLL = 0
-  NUMBER_OF_ROLLS = 20
+  THREE_PINS       = 3
+  FIVE_PINS        = 5
+  ONE_PIN          = 1
+  GUTTER_ROLL      = 0
+  NUMBER_OF_ROLLS  = 20
+  STRIKE           = 10
 
   describe 'roll' do
     let(:game) { described_class.new }
@@ -60,6 +61,11 @@ describe Game do
     it 'calculates the score for a spare' do
       game = described_class.new.roll(FIVE_PINS).roll(FIVE_PINS).roll(THREE_PINS)
       expect(game.score).to eq 16
+    end
+
+    it 'calculates teh score for a strike' do
+      game = described_class.new.roll(STRIKE).roll(THREE_PINS).roll(FIVE_PINS)
+      expect(game.score).to eq 26
     end
   end
 end
