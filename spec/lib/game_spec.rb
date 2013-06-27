@@ -37,5 +37,10 @@ describe Game do
       game = described_class.new([GUTTER_ROLL] * 20)
       expect(game.score).to eq 0
     end
+
+    it 'calculates the score for a regular game' do
+      game = described_class.new([A_NUMBER_OF_PINS] * 20)
+      expect(game.score).to eq 60
+    end
   end
 end
