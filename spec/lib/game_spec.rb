@@ -15,6 +15,7 @@ end
 
 describe Game do
   THREE_PINS = 3
+  FIVE_PINS = 5
   ONE_PIN = 1
   GUTTER_ROLL = 0
   NUMBER_OF_ROLLS = 20
@@ -42,6 +43,11 @@ describe Game do
     it 'calculates the score for a regular game' do
       game = described_class.new([THREE_PINS] * NUMBER_OF_ROLLS)
       expect(game.score).to eq 60
+    end
+
+    it 'calculates the score for a spare' do
+      game = described_class.new([]).roll(FIVE_PINS).roll(FIVE_PINS).roll(THREE_PINS)
+      expect(game.score).to eq 16
     end
   end
 end
