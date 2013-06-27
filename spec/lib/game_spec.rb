@@ -1,6 +1,6 @@
 class Game
   attr_reader :rolls
-  def initialize(rolls)
+  def initialize(rolls = [])
     @rolls = rolls
   end
 
@@ -33,7 +33,7 @@ describe Game do
   NUMBER_OF_ROLLS = 20
 
   describe 'roll' do
-    let(:game) { described_class.new([]) }
+    let(:game) { described_class.new }
 
     it 'adds the result of the roll' do
       game_after_roll = game.roll(THREE_PINS)
@@ -58,7 +58,7 @@ describe Game do
     end
 
     it 'calculates the score for a spare' do
-      game = described_class.new([]).roll(FIVE_PINS).roll(FIVE_PINS).roll(THREE_PINS)
+      game = described_class.new.roll(FIVE_PINS).roll(FIVE_PINS).roll(THREE_PINS)
       expect(game.score).to eq 16
     end
   end
