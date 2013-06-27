@@ -9,7 +9,7 @@ class Game
   end
 
   def score
-    0
+    rolls.inject(0) { |score, roll| score + roll }
   end
 end
 
