@@ -5,7 +5,7 @@ class Game
   end
 
   def roll(pins)
-    Game.new [pins]
+    Game.new(@rolls << pins)
   end
 end
 
