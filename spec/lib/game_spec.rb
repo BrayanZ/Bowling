@@ -7,6 +7,10 @@ class Game
   def roll(pins)
     Game.new(@rolls << pins)
   end
+
+  def score
+    0
+  end
 end
 
 describe Game do
