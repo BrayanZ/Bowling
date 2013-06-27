@@ -1,38 +1,4 @@
-class Game
-  attr_reader :rolls
-  def initialize(rolls = [])
-    @rolls = rolls
-  end
-
-  def roll(pins)
-    rolls = @rolls.dup.tap do |rolls| 
-      rolls << pins 
-      rolls << 0 if pins == 10
-    end
-    Game.new(rolls)
-  end
-
-  def score
-    rolls.each_with_index.each_slice(2).inject(0) do |score, ((first_roll, index), (second_roll, _))|
-      score += frame_score([first_roll, second_roll || 0], index)
-    end
-  end
-
-  def frame_score(frame, index)
-    score = frame.reduce(:+)
-    score += rolls[index + 2] if spare? frame
-    score += rolls[index + 2] + rolls[index + 3] if strike? frame
-    return score
-  end
-
-  def spare? frame
-    frame.reduce(:+) == 10 && frame[1] != 0
-  end
-
-  def strike? frame
-    frame[0] == 10
-  end
-end
+require 'game'
 
 describe Game do
   THREE_PINS       = 3
