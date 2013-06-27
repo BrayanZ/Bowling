@@ -9,7 +9,19 @@ class Game
   end
 
   def score
-    rolls.inject(0) { |score, roll| score + roll }
+    rolls.each_with_index.each_slice(2).inject(0) do |score, ((first_roll, index), (second_roll, _))|
+      score += frame_score([first_roll, second_roll || 0], index)
+    end
+  end
+
+  def frame_score(frame, index)
+    score = frame.reduce(:+)
+    score += rolls[index + 2] if spare? frame
+    return score
+  end
+
+  def spare? frame
+    frame.reduce(:+) == 10
   end
 end
 
