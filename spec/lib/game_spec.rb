@@ -42,5 +42,15 @@ describe Game do
       game = described_class.new.roll(STRIKE).roll(THREE_PINS).roll(FIVE_PINS)
       expect(game.score).to eq 26
     end
+
+    it 'calculates the score for spare in frame 10' do
+      game = described_class.new
+      game_finished = roll_pins(game, ONE_PIN, 9).roll(FIVE_PINS).roll(FIVE_PINS).roll(THREE_PINS)
+      expect(game_finished.score).to eq 31
+    end
+  end
+
+  def roll_pins(game, pins, frames)
+    (frames*2).times.inject(game){ |game, _| game.roll(pins) }
   end
 end
