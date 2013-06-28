@@ -17,7 +17,8 @@ class Game
   end
 
   def score
-    rolls.each_with_index.each_slice(2).inject(0) { |score, ((first_roll, index), (second_roll, _))| score += frame_score(first_roll, second_roll || 0, index) }
+    frames = rolls.each_slice(2).to_a
+    frames.take(10).each_with_index.inject(0) { |score, ((first_roll, second_roll), index)| score += frame_score(first_roll, second_roll || 0, index * 2) }
   end
 
   def frame_score(first_roll, second_roll, index)
