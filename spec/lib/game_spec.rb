@@ -48,6 +48,11 @@ describe Game do
       game_finished = roll_pins(game, ONE_PIN, 9).roll(FIVE_PINS).roll(FIVE_PINS).roll(THREE_PINS)
       expect(game_finished.score).to eq 31
     end
+
+    it 'calculates the score for trike at 10th frame' do
+      game = roll_pins(described_class.new, ONE_PIN, 9).roll(STRIKE).roll(THREE_PINS).roll(FIVE_PINS)
+      expect(game.score).to eq 36
+    end
   end
 
   def roll_pins(game, pins, frames)
